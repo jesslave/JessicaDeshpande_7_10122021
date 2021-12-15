@@ -1,3 +1,5 @@
+import search from './search.js'
+
 export default class filters {
 
     //Create the filters
@@ -86,11 +88,11 @@ export default class filters {
 
          filterSection.innerHTML = filterSection.innerHTML + ingredientFilterTemplate + appareilFilterTemplate + ustensilFilterTemplate;
 
-         this.addEvents();
+         this.addEvents(data);
     }
 
     //Add differents events related to the filters
-    addEvents() {
+    addEvents(data) {
         //Hide all filter content then active the current one
         document.querySelectorAll('.filterButton').forEach(item => {
             item.addEventListener('click', event => {
@@ -122,12 +124,19 @@ export default class filters {
             })
         })
 
-        //Add to all list item the event to add their label to active label section
+        //Add to all list item the event to add their label to active label section + update the search result
         document.querySelectorAll('.filterItem').forEach(item => {
             item.addEventListener('click', event => {
-                this.addActiveFilter(event.target.innerText, event.target.parentElement.parentElement.parentElement.id);
+                this.addActiveFilter(event.target.innerText, event.target.parentElement.parentElement.parentElement.id, data);
+                new search().search(data, "");
             })
         })
+
+        //Add event to the search bar + update the search result
+        document.querySelector('.fa-search').addEventListener('click', event => {
+            new search().search(data, event.target.parentElement.parentElement.parentElement.children[0].value);
+        })
+
     }
 
     //Return a html list li of items from a list of strings
@@ -158,7 +167,7 @@ export default class filters {
     }
 
     //Add active filter from the value of the filter and the type of filter (ingredient or appareil or ustensil)
-    addActiveFilter(filterValue, typeOfFilter) {
+    addActiveFilter(filterValue, typeOfFilter, data) {
             //Get active filter section
             let activeFilterSection = document.getElementById('activeFilters');
             //Check if the filter is already active
@@ -194,15 +203,16 @@ export default class filters {
     
                 activeFilterSection.innerHTML = activeFilterSection.innerHTML + templateFilter;
             }
-
-            this.addRemoveFilterEvent();
+            this.addRemoveFilterEvent(data);
     }
 
     //Add remove event to all active filters
-    addRemoveFilterEvent() {
+    addRemoveFilterEvent(data) {
         document.querySelectorAll('.fa-times-circle').forEach(item => {
             item.addEventListener('click', event => {
                 event.target.parentElement.remove();
+                //reset the search with the data and the current main search bar value
+                new search().search(data, document.querySelector('.searchbar').value);
             })
         })
     }

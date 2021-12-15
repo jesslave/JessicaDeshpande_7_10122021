@@ -2,12 +2,12 @@ export default class recipe {
 
 
     //Create the recipe
-    createRecipe(data) {
+    createRecipe(recipes) {
 
         //Get recipe section
         let recipeSection = document.getElementById('recipes');
 
-        data.recipes.forEach(recipe => {
+        recipes.forEach(recipe => {
 
             //Getting all recipe ingredient datas
             let ingredientTemplate = "";
@@ -18,7 +18,7 @@ export default class recipe {
                     ingredientTemplate =  ingredientTemplate + `<li><strong>${ingredient.ingredient}</strong></li>`;
                 }
                 else {
-                    ingredientTemplate =  ingredientTemplate + `<li><strong>${ingredient.ingredient}:</strong> `+ quantity + unit +`</li>`;
+                    ingredientTemplate =  ingredientTemplate + `<li><strong>${ingredient.ingredient}: </strong> `+ quantity + unit +`</li>`;
                 }
             })
 
