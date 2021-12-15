@@ -39,7 +39,7 @@ export default class recipe {
 
             //Creating the recipe article
             let recipeTemplate = `
-            <article class="container recipe">
+            <article id="${recipe.id}" class="container recipe">
 
                 <img class="row recipeImg" src="../medias/recipeImg.png" alt="${recipe.name}" />
 

@@ -74,7 +74,7 @@ export default class filters {
          //Ustensil filter
          let ustensilFilterTemplate = `
          <div id="ustensilFilter">
-            <div class="filterButton red">Ustensil <i class="fa fa-chevron-down"></i></div>
+            <div class="filterButton red">Ustensile <i class="fa fa-chevron-down"></i></div>
             <div class="filterContent">
                 <div class="filterHeader red">
                     <input type="text" class="filterSearch red" placeholder="Rechercher un ustensil" aria-label="search ustensil" aria-describedby="basic-addon2">
