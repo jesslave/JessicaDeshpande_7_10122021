@@ -7,6 +7,17 @@ export default class recipe {
         //Get recipe section
         let recipeSection = document.getElementById('recipes');
 
+        //Show the count of results for more conveinance
+        let countSection = document.getElementById('countResults');
+        //label plural depending the number of found
+        if (recipes.length == 0 || recipes.length == 1) {
+            countSection.innerHTML = `<div class="resultsCount">`+ recipes.length +` recette trouvée !</div>`
+        }
+        else {
+            countSection.innerHTML = `<div class="resultsCount">`+ recipes.length +` recettes trouvées !</div>`
+        }
+        
+
         recipes.forEach(recipe => {
 
             //Getting all recipe ingredient datas

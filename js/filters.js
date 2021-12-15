@@ -60,7 +60,7 @@ export default class filters {
             <div class="filterButton green">Appareil <i class="fa fa-chevron-down"></i></div>
             <div class="filterContent">
                 <div class="filterHeader green">
-                    <input type="text" class="filterSearch green" placeholder="Rechercher un ingrédient" aria-label="search appareil" aria-describedby="basic-addon2">
+                    <input type="text" class="filterSearch green" placeholder="Rechercher un appareil" aria-label="search appareil" aria-describedby="basic-addon2">
                     <i class="fa fa-chevron-up"></i>
                 </div>
                 <ul class="filterList green">
@@ -76,7 +76,7 @@ export default class filters {
             <div class="filterButton red">Ustensil <i class="fa fa-chevron-down"></i></div>
             <div class="filterContent">
                 <div class="filterHeader red">
-                    <input type="text" class="filterSearch red" placeholder="Rechercher un ingrédient" aria-label="search ustensil" aria-describedby="basic-addon2">
+                    <input type="text" class="filterSearch red" placeholder="Rechercher un ustensil" aria-label="search ustensil" aria-describedby="basic-addon2">
                     <i class="fa fa-chevron-up"></i>
                 </div>
                 <ul class="filterList red">
@@ -137,6 +137,12 @@ export default class filters {
             new search().search(data, event.target.parentElement.parentElement.parentElement.children[0].value);
         })
 
+        //Add event of the search bar when we press enter
+        document.querySelector('.searchbar').addEventListener('keydown', event => {
+            if (event.key == "Enter") {
+                new search().search(data, event.target.value);
+            }
+        })
     }
 
     //Return a html list li of items from a list of strings
@@ -151,19 +157,17 @@ export default class filters {
 
     //Filter a list of List item with a filter value.
     filterFunction(filter, list) {
-        if (filter != undefined && filter != "") {
-            var txtValue, li, i;
-            li = list.getElementsByTagName("li");
-            //For all item found in the list, we get the text value and if the filter match with the part of the current list item we dont hide the list item, else we hide it with a display:none
-            for (i = 0; i < li.length; i++) {
-                txtValue = li[i].textContent || li[i].innerText;
-                if (txtValue.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-        }
+		var txtValue, li, i;
+		li = list.getElementsByTagName("li");
+		//For all item found in the list, we get the text value and if the filter match with the part of the current list item we dont hide the list item, else we hide it with a display:none
+		for (i = 0; i < li.length; i++) {
+			txtValue = li[i].textContent || li[i].innerText;
+			if (txtValue.toUpperCase().indexOf(filter.toUpperCase()) > -1) {
+				li[i].style.display = "";
+			} else {
+				li[i].style.display = "none";
+			}
+		}
     }
 
     //Add active filter from the value of the filter and the type of filter (ingredient or appareil or ustensil)

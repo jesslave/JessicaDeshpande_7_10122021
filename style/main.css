@@ -66,7 +66,6 @@ html {
 
 .recipeDesc {
     overflow: hidden;
-    height: 8rem;
     display: -webkit-box;
     -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
@@ -203,6 +202,14 @@ h1 {
 .removeActiveFilter {
     border-radius: 50%;
     border: solid 1px white;
+}
+
+.resultsCount {
+    background-color: lightgoldenrodyellow;
+    margin: 1rem 0 1rem 0;
+    font-weight: bold;
+    padding: 0.5rem;
+    width: 12rem;
 }
 
 @media(max-width:780px) {
