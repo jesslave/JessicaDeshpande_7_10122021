@@ -212,6 +212,13 @@ h1 {
     width: 12rem;
 }
 
+.noResultFound {
+    background-color: lightgoldenrodyellow;
+    margin: 1rem 0 1rem 0;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
 @media(max-width:780px) {
     #recipes {
         justify-content: center;

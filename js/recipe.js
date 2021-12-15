@@ -10,7 +10,11 @@ export default class recipe {
         //Show the count of results for more conveinance
         let countSection = document.getElementById('countResults');
         //label plural depending the number of found
-        if (recipes.length == 0 || recipes.length == 1) {
+        if (recipes.length == 0 ) {
+            countSection.innerHTML = `<div class="noResultFound">« Aucune recette ne correspond à votre critère… vous pouvez
+            chercher « tarte aux pommes », « poisson », etc.</div>`
+        }
+        else if (recipes.length == 1) {
             countSection.innerHTML = `<div class="resultsCount">`+ recipes.length +` recette trouvée !</div>`
         }
         else {

@@ -1,4 +1,5 @@
 import search from './search.js'
+import database from '../data/recipeData.json'  assert { type: "json" };
 
 export default class filters {
 
@@ -13,7 +14,7 @@ export default class filters {
         let filterSection = document.getElementById('filters');
 
         //For each recipe we fullfill our arrays of ingredient,appareil and ustensils if the item is not already in the array, we add it
-        data.recipes.forEach(recipe => {
+        data.forEach(recipe => {
 
             recipe.ingredients.forEach(ingredient => {
                 if (!ingredients.includes(ingredient.ingredient)) {
@@ -132,17 +133,6 @@ export default class filters {
             })
         })
 
-        //Add event to the search bar + update the search result
-        document.querySelector('.fa-search').addEventListener('click', event => {
-            new search().search(data, event.target.parentElement.parentElement.parentElement.children[0].value);
-        })
-
-        //Add event of the search bar when we press enter
-        document.querySelector('.searchbar').addEventListener('keydown', event => {
-            if (event.key == "Enter") {
-                new search().search(data, event.target.value);
-            }
-        })
     }
 
     //Return a html list li of items from a list of strings
@@ -207,7 +197,7 @@ export default class filters {
     
                 activeFilterSection.innerHTML = activeFilterSection.innerHTML + templateFilter;
             }
-            this.addRemoveFilterEvent(data);
+            this.addRemoveFilterEvent(database.recipes);
     }
 
     //Add remove event to all active filters
@@ -219,5 +209,28 @@ export default class filters {
                 new search().search(data, document.querySelector('.searchbar').value);
             })
         })
+    }
+
+    //Creation of events related to the main search
+    mainSearchFilterEventCreation(data) {
+        //Add event to the search bar + update the search result
+        document.querySelector('.fa-search').addEventListener('click', event => {
+            new search().search(data, event.target.parentElement.parentElement.parentElement.children[0].value);
+        })
+
+        //Add event of the search bar if there is more than 3 char
+        document.querySelector('.searchbar').addEventListener('keyup', event => {
+            if (event.target.value.length >= 3) {
+                new search().search(data, event.target.value);
+            }
+        })
+
+        //Add event of the search bar when we press enter
+        document.querySelector('.searchbar').addEventListener('keydown', event => {
+            if (event.key == "Enter") {
+                new search().search(data, event.target.value);
+            }
+        })
+        
     }
 }

@@ -1,4 +1,5 @@
 import recipe from './recipe.js'
+import filters from './filters.js'
 
 export default class search {
 
@@ -6,11 +7,13 @@ export default class search {
     //Create the recipe
     search(data, filterMainSearch) {
 
-        //Get recipe section
+        //Get recipe section and filters
         let recipeSection = document.getElementById('recipes');
+        let filtersSection = document.getElementById('filters');
         //Reset that section
+        filtersSection.innerHTML = "";
         recipeSection.innerHTML = "";
-        var filteredData = data.recipes;
+        var filteredData = data;
         //Get the active filter
         let activeFilterSection = document.getElementById('activeFilters');
         //Check if the filter is already active
@@ -29,13 +32,14 @@ export default class search {
                 }
             } 
         }
-        //Check if the main bar is empty or not. If not that filter is also taken
-        if (filterMainSearch != "" || filterMainSearch != undefined) {
-            filteredData = this.filterData(filteredData, "", filterMainSearch);
-        }
+
+        //Filter Mainbar
+        filteredData = this.filterData(filteredData, "", filterMainSearch);
+        
 
         //Write the filtered list of recipes
         new recipe().createRecipe(filteredData);
+        new filters().createFilters(filteredData);
     }
 
     //Filter data from a list, a type of filter and a value to filter
@@ -150,6 +154,16 @@ export default class search {
                     //Check description
                     else {
                         if (recipeList[i].description.toUpperCase().includes(valueToFilter)) {
+                            newList.push(recipeList[i]);
+                        }
+                    }
+                     //If we found a match we go next else we continue the search on other fields of the current recipe
+                     if (elementFound) {
+                        continue;
+                    }
+                    //Check title
+                    else {
+                        if (recipeList[i].name.toUpperCase().includes(valueToFilter)) {
                             newList.push(recipeList[i]);
                         }
                     }
