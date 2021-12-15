@@ -7,12 +7,6 @@ export default class search {
     //Create the recipe
     search(data, filterMainSearch) {
         var start = window.performance.now();
-        //Get recipe section and filters
-        let recipeSection = document.getElementById('recipes');
-        let filtersSection = document.getElementById('filters');
-        //Reset that section
-        filtersSection.innerHTML = "";
-        recipeSection.innerHTML = "";
         var filteredData = data;
         //Get the active filter
         let activeFilterSection = document.getElementById('activeFilters');
@@ -37,8 +31,8 @@ export default class search {
         filteredData = this.filterData(filteredData, "", filterMainSearch);
         
         //Write the filtered list of recipes
-        new recipe().createRecipe(filteredData);
-        new filters().createFilters(filteredData);
+        new recipe().filterRecipe(filteredData);
+        new filters().filterFilterElements(filteredData);
         
         var end = window.performance.now();
         console.log(`Execution time: ${end - start} ms`);

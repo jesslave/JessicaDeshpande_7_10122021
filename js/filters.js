@@ -35,9 +35,9 @@ export default class filters {
 
         })
          //Creating the filter template
-         let ingredientListTemplate = this.formList(ingredients);
-         let appareilLisTtemplate = this.formList(appareils);
-         let ustensilTemplate = this.formList(ustensils);
+         let ingredientListTemplate = this.formList(ingredients, 'ingredientItem');
+         let appareilLisTtemplate = this.formList(appareils, 'appareilItem');
+         let ustensilTemplate = this.formList(ustensils, 'ustensilItem');
 
          //Ingredient filter
          let ingredientFilterTemplate = `
@@ -136,10 +136,11 @@ export default class filters {
     }
 
     //Return a html list li of items from a list of strings
-    formList(list) {
+    formList(list, itemClass) {
         var template = "";
         list.forEach(element => {
-            template = template + `<li class="filterItem" data-filter=`+ element +`>${element}</li>` 
+            var id = element.normalize('NFD').replace(/([\u0300-\u036f]|[^0-9a-zA-Z])/g, '');
+            template = template + `<li id="` + id + `" class="filterItem ` + itemClass + `" data-filter=`+ element +`>${element}</li>` 
         })
 
         return template;
@@ -229,6 +230,66 @@ export default class filters {
         document.querySelector('.searchbar').addEventListener('keydown', event => {
             if (event.key == "Enter") {
                 new search().search(data, event.target.value);
+            }
+        })
+        
+    }
+
+    //hide or show filter element of lists with the given list of recipes
+    filterFilterElements(recipeList) {
+        //Get the 3 list of filters
+        var ingredientListItem = document.querySelectorAll('.ingredientItem');
+        var appareilListItem = document.querySelectorAll('.appareilItem');
+        var ustensilItem = document.querySelectorAll('.ustensilItem');
+
+        //Init arrays
+        let ingredients = [];
+        let appareils = [];
+        let ustensils = []
+
+        //For each recipe we fullfill our arrays of ingredient,appareil and ustensils if the item is not already in the array, we add it
+        recipeList.forEach(recipe => {
+
+            recipe.ingredients.forEach(ingredient => {
+                if (!ingredients.includes(ingredient.ingredient)) {
+                    ingredients.push(ingredient.ingredient);
+                }
+            })
+
+            if (!appareils.includes(recipe.appliance)) {
+                appareils.push(recipe.appliance);
+            }
+
+            recipe.ustensils.forEach(ustensil => {
+                if (!ustensils.includes(ustensil)) {
+                    ustensils.push(ustensil);
+                }
+            })
+        })
+
+        //For each lists, if the current element is in the list, display block else display none
+        ingredientListItem.forEach(element => {
+            if (ingredients.includes(element.innerHTML)) {
+                element.style.display = "block";
+            }
+            else {
+                element.style.display = "none";
+            }
+        })
+        appareilListItem.forEach(element => {
+            if (appareils.includes(element.innerHTML)) {
+                element.style.display = "block";
+            }
+            else {
+                element.style.display = "none";
+            }
+        })
+        ustensilItem.forEach(element => {
+            if (ustensils.includes(element.innerHTML)) {
+                element.style.display = "block";
+            }
+            else {
+                element.style.display = "none";
             }
         })
         

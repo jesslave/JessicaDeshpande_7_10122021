@@ -7,20 +7,7 @@ export default class recipe {
         //Get recipe section
         let recipeSection = document.getElementById('recipes');
 
-        //Show the count of results for more conveinance
-        let countSection = document.getElementById('countResults');
-        //label plural depending the number of found
-        if (recipes.length == 0 ) {
-            countSection.innerHTML = `<div class="noResultFound">« Aucune recette ne correspond à votre critère… vous pouvez
-            chercher « tarte aux pommes », « poisson », etc.</div>`
-        }
-        else if (recipes.length == 1) {
-            countSection.innerHTML = `<div class="resultsCount">`+ recipes.length +` recette trouvée !</div>`
-        }
-        else {
-            countSection.innerHTML = `<div class="resultsCount">`+ recipes.length +` recettes trouvées !</div>`
-        }
-        
+        this.updateCount(recipes);
 
         recipes.forEach(recipe => {
 
@@ -61,5 +48,43 @@ export default class recipe {
 
             recipeSection.innerHTML = recipeSection.innerHTML + recipeTemplate;
         })
+    }
+
+    //hide or show recipe with the given list
+    filterRecipe(recipeList) {
+        //Get all article
+        var recipesOnDom = document.querySelectorAll('article');
+        //Get all id of the given list
+        var listOfId = recipeList.map(function(x) {return x.id});
+
+        //For each article, if the current id is in the list, display block else display none
+        recipesOnDom.forEach(recipe => {
+            if (listOfId.includes(parseInt(recipe.id))) {
+                recipe.style.display = "block";
+            }
+            else {
+                recipe.style.display = "none";
+            }
+        })
+
+        this.updateCount(recipeList);
+        
+    }
+
+    //Update the count section
+    updateCount(recipes) {
+        //Show the count of results for more conveinance
+        let countSection = document.getElementById('countResults');
+        //label plural depending the number of found
+        if (recipes.length == 0 ) {
+            countSection.innerHTML = `<div class="noResultFound">« Aucune recette ne correspond à votre critère… vous pouvez
+            chercher « tarte aux pommes », « poisson », etc.</div>`
+        }
+        else if (recipes.length == 1) {
+            countSection.innerHTML = `<div class="resultsCount">`+ recipes.length +` recette trouvée !</div>`
+        }
+        else {
+            countSection.innerHTML = `<div class="resultsCount">`+ recipes.length +` recettes trouvées !</div>`
+        }
     }
 }
