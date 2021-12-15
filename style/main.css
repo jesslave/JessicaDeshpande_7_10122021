@@ -1,0 +1,95 @@
+html {
+    margin: 0 auto;
+    max-width: 1280px;
+}
+.main {
+    margin: 1.5rem;
+}
+
+.logoLink {
+    display: flex;
+    justify-content: center;
+    height: 7.5rem;
+}
+
+.searchbar {
+    background-color: rgba(226, 226, 226, 0.582);
+    height: 4rem;
+    border: none;
+}
+
+.searchbutton {
+    background-color: rgba(226, 226, 226, 0.582);
+    border: none;
+    width: 4rem;
+    justify-content: center;
+}
+
+#recipes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.recipe {
+    width: 22.5rem;
+    height: 20rem;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.recipeImg {
+    border-radius: 5px;
+    width:22.5rem;
+    height:7.5rem;
+    object-fit:cover;
+}
+
+.recipeHeader {
+    display: flex;
+    background-color: rgba(226, 226, 226, 0.582);
+    height: 3rem;
+    font-size: 0.8rem;
+}
+
+.recipeFooter {
+    display: flex;
+    background-color: rgba(226, 226, 226, 0.582);
+    font-size: 0.7rem;
+    height: 8rem;
+}
+
+.recipeIngredients { 
+    list-style: none;
+}
+
+.recipeDesc {
+    overflow: hidden;
+    height: 8rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+}
+
+h1 {
+    font-size: 0.8rem;
+}
+
+.time {
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.fa-clock-o {
+    margin-right: 0.5rem;
+}
+
+.emptySpace {
+    height: 1rem;
+    background-color: rgba(226, 226, 226, 0.582);
+}
+
+@media(max-width:780px) {
+    #recipes {
+        justify-content: center;
+    }
+}
