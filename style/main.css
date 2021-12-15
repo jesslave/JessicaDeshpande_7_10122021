@@ -111,6 +111,7 @@ h1 {
 
 #filters {
     display: flex;
+    position: relative;
 }
 
 .filterSearch{
@@ -135,7 +136,7 @@ h1 {
     width: 30rem;
     position: absolute;
     z-index: 1;
-    top: 14rem;
+    top: 0;
     display: none;
 }
 
@@ -178,11 +179,29 @@ h1 {
 }
 
 
-.fa-chevron-up, .fa-chevron-down {
+.fa-chevron-up, .fa-chevron-down, .fa-times-circle {
     color: white;
     cursor: pointer;
 }
 
+#activeFilters {
+    display: flex;
+    color: white;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.activeFilterContent {
+    padding: 0.25rem 0.75rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin: 0.5rem;
+}
+
+.removeActiveFilter {
+    border-radius: 50%;
+    border: solid 1px white;
+}
 
 @media(max-width:780px) {
     #recipes {
