@@ -88,8 +88,118 @@ h1 {
     background-color: rgba(226, 226, 226, 0.582);
 }
 
+.filterButton {
+    color: white;
+    padding: 1rem;
+    width: 10rem;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.filterButton:hover {
+    -webkit-filter: brightness(90%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+#filters {
+    display: flex;
+}
+
+.filterSearch{
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+}
+
+.filterSearch:focus {
+    outline: none;
+}
+
+.filterSearch::placeholder {
+    color: #99c0fb;
+}
+
+.filterContent {
+    width: 30rem;
+    position: absolute;
+    z-index: 1;
+    top: 14rem;
+    display: none;
+}
+
+.filterList {
+    color: white;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 0 1rem 0;
+    border-radius: 0 0 5px 5px;
+}
+
+.filterItem {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    width: 10rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.filterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 5px 5px 0 0;
+    padding: 0.5rem 1rem;
+}
+
+.blue {
+    background-color: #3282f7;
+}
+
+.red {
+    background-color: #ed6454;
+}
+
+.green {
+    background-color: #68d9a4;
+}
+
+
+.fa-chevron-up, .fa-chevron-down {
+    color: white;
+    cursor: pointer;
+}
+
+
 @media(max-width:780px) {
     #recipes {
         justify-content: center;
+    }
+
+}
+
+
+@media(max-width:860px) {
+
+    #filters {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filterButton {
+        margin-bottom: 0.5rem;
     }
 }
