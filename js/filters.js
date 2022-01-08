@@ -223,6 +223,10 @@ export default class filters {
             if (event.target.value.length >= 3) {
                 new search().search(data, event.target.value);
             }
+            //If lesser than 3 we reset the searchbar
+            else if (event.target.value.length < 3) {
+                new search().search(data, "");
+            }
         })
 
         //Add event of the search bar when we press enter
